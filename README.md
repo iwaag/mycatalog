@@ -24,6 +24,11 @@ submodules, into your installation's Gitea and wire the roles. See agdev's
 
 A role is filled by one project per installation. Public repositories need no credential.
 
+The **summoner** (listed here too) does this for you: request its `propose` workflow with a
+braindump, and it reads this catalog, proposes the entries your braindumps call for with the
+reasons, and applies the plan once you agree. A new agdev installation receives it first
+(`agdevctl bootstrap-projects` with no plan).
+
 ## Provenance
 
 This repository is an edited selection of a private mind repository: the catalog and `mind.yaml`,
