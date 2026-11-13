@@ -1,0 +1,21 @@
+schema: ag.catalog.v1
+owner: iwaag
+projects:
+  - project: warden
+    source: https://github.com/iwaag/pj-warden.git
+    commit: 688687c9208379737a55272094cdf3228c7068f8
+    description: "System operations: recovers runs the observer finds interrupted or stuck, and coordinates which queued work starts where."
+    roles: {recovery: recover, coordination: coordinate}
+    because: [braindumps/nondeterministic-recovery.md]
+  - project: ponderer
+    source: https://github.com/iwaag/pj-ponderer.git
+    commit: f47e065891bb2ba2376211cd1c002bd69a0ea5e6
+    description: "Conducts discussions between a person and project agents, keeps their archive, and learns from how they went."
+    roles: {facilitation: conduct, conversation-archive: true}
+    because: [braindumps/orchestration.md]
+  - project: aghangout
+    source: https://github.com/iwaag/pj-aghangout.git
+    commit: 4d4c0ce961adb856ff930f41cbc2050d5041bcc5
+    description: "The conversation page (/hangout/): meet characterized project agents and talk with them; also renders character dialogue."
+    roles: {conversation-page: true, dialogue-renderer: true}
+    because: [braindumps/a-place-to-talk.md, braindumps/interfaces-for-imagination.md]
