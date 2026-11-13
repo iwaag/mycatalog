@@ -21,6 +21,6 @@ projects:
     because: [braindumps/a-place-to-talk.md, braindumps/interfaces-for-imagination.md]
   - project: summoner
     source: https://github.com/iwaag/pj-summoner.git
-    commit: a0d65ce45f2dc68182859882020de9f3963b39ff
+    commit: 073ef144179da3fd35fb0e1109b3c0a11d028144
     description: "Proposes an installation's projects from its braindumps and the catalogs it is pointed at, and applies the plan after the person agrees. The core refers to it."
     because: [braindumps/summoning.md]
