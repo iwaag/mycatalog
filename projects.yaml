@@ -1,4 +1,4 @@
-schema: ag.catalog.v1
+schema: ag.projects.v1
 owner: iwaag
 projects:
   - project: warden
@@ -6,21 +6,21 @@ projects:
     commit: 688687c9208379737a55272094cdf3228c7068f8
     description: "System operations: recovers runs the observer finds interrupted or stuck, and coordinates which queued work starts where."
     roles: {recovery: recover, coordination: coordinate}
-    because: [braindumps/nondeterministic-recovery.md]
+    because: [braindumps/episodes/nondeterministic-recovery/braindump.md]
   - project: ponderer
     source: https://github.com/iwaag/pj-ponderer.git
     commit: f47e065891bb2ba2376211cd1c002bd69a0ea5e6
     description: "Conducts discussions between a person and project agents, keeps their archive, and learns from how they went."
     roles: {facilitation: conduct, conversation-archive: true}
-    because: [braindumps/orchestration.md]
+    because: [braindumps/episodes/orchestration/braindump.md]
   - project: aghangout
     source: https://github.com/iwaag/pj-aghangout.git
     commit: 4d4c0ce961adb856ff930f41cbc2050d5041bcc5
     description: "The conversation page (/hangout/): meet characterized project agents and talk with them; also renders character dialogue."
     roles: {conversation-page: true, dialogue-renderer: true}
-    because: [braindumps/a-place-to-talk.md, braindumps/interfaces-for-imagination.md]
+    because: [braindumps/episodes/a-place-to-talk/braindump.md, braindumps/episodes/interfaces-for-imagination/braindump.md]
   - project: summoner
     source: https://github.com/iwaag/pj-summoner.git
-    commit: 538abeeb103c9555ad38343951b37440d135aa00
+    commit: 9699cbd23cfac9c72c24c88d064311b1158f0817
     description: "Proposes an installation's projects from its braindumps and the catalogs it is pointed at, and applies the plan after the person agrees. The core refers to it."
-    because: [braindumps/summoning.md]
+    because: [braindumps/episodes/summoning/braindump.md]
