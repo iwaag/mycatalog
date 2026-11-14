@@ -1,4 +1,4 @@
-# agdev-mind (iwaag)
+# mycatalog (iwaag)
 
 The public part of iwaag's **mind repository** for [agdev](https://github.com/iwaag/agdev): the
 projects iwaag shares, for anyone who runs their own agdev installation and wants to summon them.
@@ -9,8 +9,9 @@ projects iwaag shares, for anyone who runs their own agdev installation and want
   references only say that grounds exist.
 - `mind.yaml` (`ag.mind.v1`): whose mind this is.
 
-The name is fixed: a user's shared projects are found at `<user>/agdev-mind`, so this one is
-`iwaag/agdev-mind`.
+The name is fixed: a user's shared projects are found at `<user>/mycatalog`, so this one is
+`iwaag/mycatalog`. Naming the user is therefore enough to import iwaag's development style into
+an agdev installation: `wfe summon style iwaag`, or *Import a development style* on the Mind page.
 
 ## Summoning from the catalog
 
