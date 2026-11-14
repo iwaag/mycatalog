@@ -9,18 +9,18 @@ projects:
     because: [braindumps/episodes/nondeterministic-recovery/braindump.md]
   - project: ponderer
     source: https://github.com/iwaag/pj-ponderer.git
-    commit: f47e065891bb2ba2376211cd1c002bd69a0ea5e6
+    commit: 58bd011b788c68342932ffea679b1c9a135a5f7a
     description: "Conducts discussions between a person and project agents, keeps their archive, and learns from how they went."
     roles: {facilitation: conduct, conversation-archive: true}
     because: [braindumps/episodes/orchestration/braindump.md]
   - project: aghangout
     source: https://github.com/iwaag/pj-aghangout.git
-    commit: 4d4c0ce961adb856ff930f41cbc2050d5041bcc5
+    commit: 45976bb5faebf6804ade0485af7110d1d2658d68
     description: "The conversation page (/hangout/): meet characterized project agents and talk with them; also renders character dialogue."
     roles: {conversation-page: true, dialogue-renderer: true}
     because: [braindumps/episodes/a-place-to-talk/braindump.md, braindumps/episodes/interfaces-for-imagination/braindump.md]
   - project: summoner
     source: https://github.com/iwaag/pj-summoner.git
-    commit: 48910c87506a2cacb89d693c4a898a5d75e56880
+    commit: 0aa7253582ce28bf442203a63e843d9a492bf4f5
     description: "Proposes an installation's projects from its braindumps and the catalogs it is pointed at, and applies the plan after the person agrees. It also writes the reviews of braindumps and the index of what is not yet real, on request. The core refers to it."
     because: [braindumps/episodes/summoning/braindump.md]
