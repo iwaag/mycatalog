@@ -1,0 +1,49 @@
+# Rules adopted by the owner from their own words (ag.catalog-rules.v2; agdev docs/mycatalog.md, Rules).
+
+schema: ag.catalog-rules.v2
+rules:
+- id: private-never-publish
+  tag: private
+  follows: never-publish
+  source:
+    braindump: mybraindump
+    sentence: Webの公開リポジトリで共有するものはpublicタグ、ローカルに留めたいものはprivateタグ
+  adopted:
+    by: iwaag
+    at: '2026-11-17T12:46:53.636Z'
+- id: public-suggest-publish
+  tag: public
+  follows: suggest-publish
+  source:
+    braindump: mybraindump
+    sentence: Webの公開リポジトリで共有するものはpublicタグ、ローカルに留めたいものはprivateタグ
+  adopted:
+    by: iwaag
+    at: '2026-11-17T12:46:57.146Z'
+- id: project-agsfx-publish
+  project: agsfx
+  follows: publish
+  source:
+    braindump: asset_projects
+    sentence: 公開のアセット制作系プロジェクトは一般化できるワークフロー、知見、スクリプトなどを可能な限り公開する。
+  adopted:
+    by: iwaag
+    at: '2026-11-17T14:29:58.700Z'
+- id: project-lowerpoly-publish
+  project: lowerpoly
+  follows: publish
+  source:
+    braindump: asset_projects
+    sentence: 公開のアセット制作系プロジェクトは一般化できるワークフロー、知見、スクリプトなどを可能な限り公開する。
+  adopted:
+    by: iwaag
+    at: '2026-11-17T14:30:07.299Z'
+- id: project-gimmickimg-publish
+  project: gimmickimg
+  follows: publish
+  source:
+    braindump: asset_projects
+    sentence: 公開のアセット制作系プロジェクトは一般化できるワークフロー、知見、スクリプトなどを可能な限り公開する。
+  adopted:
+    by: iwaag
+    at: '2026-11-17T14:30:13.970Z'

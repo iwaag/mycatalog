@@ -9,9 +9,21 @@ a private Git service. This repository holds the part chosen for publication.
 
 - `projects.yaml` (`ag.projects.v1`): the shared projects. Each entry names the project id, its Git
   `source`, a recommended `commit`, one line on what it is for, the core `roles` it can fill, and
-  `because`: the braindumps of this catalog that ground it. Those braindumps are not published
-  here yet; the references only say that grounds exist.
+  `because`: the braindumps of this catalog that ground it (see below).
 - `mycatalog.yaml` (`ag.mycatalog.v1`): whose catalog this is.
+- `braindumps/episodes/<name>/`: the braindumps iwaag tagged `public`, each as its own files only
+  (`braindump.md`, `metadata.yaml`, and `review.md` where there is one). The braindumps are
+  iwaag's words; a review is a summoner agent's reading of how far a braindump has become real.
+  Braindumps and reviews are not edited for publication, except that a review is written in a
+  public form. Not every braindump is published, so some `because` references of
+  `projects.yaml` point at braindumps that are not here.
+- `rules.yaml` (`ag.catalog-rules.v2`): the rules iwaag adopted from their own words (for example
+  which tags are published, and the default licence). Entries about projects iwaag keeps private
+  are left out of this copy.
+
+**How to read the reviews.** They cite `wfe` commands, plans and runs of iwaag's own agdev
+installation, and commit ids of internal repositories. An outside reader cannot reach them. They
+are iwaag's evidence for what was said at the time, not something to follow or reproduce.
 
 The name is fixed: a user's catalog is found at `<user>/mycatalog`, so this one is
 `iwaag/mycatalog`. Naming the user is therefore enough to import iwaag's development style into
@@ -39,5 +51,6 @@ reasons, and applies the plan once you agree. A new agdev installation receives 
 
 ## Provenance
 
-This repository is an edited selection of a private catalog: `projects.yaml` and `mycatalog.yaml`,
+This repository is an edited selection of a private catalog: `projects.yaml`, `mycatalog.yaml`, the public
+braindumps with their reviews and metadata, and `rules.yaml` (without its entries about private projects),
 with the owner's public account name. Its history is its own. Licence: CC0 1.0 (`LICENSE`).
