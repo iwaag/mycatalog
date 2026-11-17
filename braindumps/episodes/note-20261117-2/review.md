@@ -5,7 +5,7 @@ The braindump `note-20261117-2` (公開方針) has one line: public projects are
 | What it asks | What exists now | Where |
 |---|---|---|
 | Public projects are basically CC0-1.0 | Partly seen. The owner's public repositories seen state CC0-1.0 (this catalog's own `LICENSE`; the `agsfx` sound packs state CC0-1.0 per pack). Other projects' licences were not checked. | this repository; the projects' READMEs |
-| This is the owner's personal preference, so it must not be carried into other people's development style without consent | Now recorded as an adopted rule: `default-licence` in `rules.yaml` (licence CC0-1.0, `share: never`), taken from this sentence. The rule states the preference and that it is not to be shared; it does not by itself stop a tool from proposing it, so how far the guard works depends on the tool reading the rule. | `rules.yaml` |
+| This is the owner's personal preference, so it must not be carried into other people's development style without consent | Recorded as the owner's adopted rule in their own catalog: the preference is theirs and is not to be carried into others' development style. This repository's `LICENSE` is CC0-1.0. Whether a tool honours the rule depends on the tool reading it. | this repository (`LICENSE`); the owner's catalog |
 
 ## Not real
 - No project carries this policy; it is a policy, not a project wish, so no grounding is expected.

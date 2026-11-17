@@ -17,9 +17,9 @@ a private Git service. This repository holds the part chosen for publication.
   Braindumps and reviews are not edited for publication, except that a review is written in a
   public form. Not every braindump is published, so some `because` references of
   `projects.yaml` point at braindumps that are not here.
-- `rules.yaml` (`ag.catalog-rules.v2`): the rules iwaag adopted from their own words (for example
-  which tags are published, and the default licence). Entries about projects iwaag keeps private
-  are left out of this copy.
+- `rules.yaml` (`ag.catalog-rules.v2`): the rules iwaag adopted from their own words: which tags are
+  published (`public` is suggested for publication, `private` is never published) and which
+  projects are shared (`agsfx`, `lowerpoly`, `gimmickimg`).
 
 **How to read the reviews.** They cite `wfe` commands, plans and runs of iwaag's own agdev
 installation, and commit ids of internal repositories. An outside reader cannot reach them. They
@@ -52,5 +52,5 @@ reasons, and applies the plan once you agree. A new agdev installation receives 
 ## Provenance
 
 This repository is an edited selection of a private catalog: `projects.yaml`, `mycatalog.yaml`, the public
-braindumps with their reviews and metadata, and `rules.yaml` (without its entries about private projects),
+braindumps with their reviews and metadata, and `rules.yaml`,
 with the owner's public account name. Its history is its own. Licence: CC0 1.0 (`LICENSE`).
