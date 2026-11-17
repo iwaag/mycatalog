@@ -1,0 +1,7 @@
+# braindumpのタグ付け方針
+
+- タグ付けは任意。強制しない。
+- braindumpの書き方やタグの付け方に関するbraindumpの自己定義にはmybraindumpタグ
+- Webの公開リポジトリで共有するものはpublicタグ、ローカルに留めたいものはprivateタグ
+- 開発スタイルに関するbraindumpはmystyleタグ
+- 願望一般はdesireタグを付ける。具体的に自分で実行の意図を強調する場合はtodoタグ、自分では実現の見込みがないので誰かに頼みたい意図を強調する場合はbountyタグをつける。重複可。
