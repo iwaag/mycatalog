@@ -7,8 +7,8 @@ projects grouped by categories the owner chose.
 This is an example to adapt, not a part of agdev's core. The core shows braindumps, projects and
 the links between them. Which categories a project falls in, what the map is called and how it looks
 are an owner's style. The example gives no HTML, CSS or JavaScript: you (or your agent) write the
-page, and it is yours. An installation without the map loses nothing: the core's Catalog page and
-its relation diagram work the same with no view and no link.
+page, and it is yours. An installation without the map loses nothing: the core's Catalog page works the same with no view
+and no link.
 
 Everything named in `example.yaml` below `fictional:`, and every id, host and commit in this file,
 is invented.
@@ -35,7 +35,7 @@ of the core. The page writes nothing.
 
 | Read | What the map takes from it | Core document |
 | --- | --- | --- |
-| `api/catalog` | the braindumps, the projects with the braindumps that ground them, pending link suggestions, what the owner stated about disclosure | `workflow_editor/docs/mycatalog.md` |
+| `api/catalog` | the braindumps, the projects with the braindumps that ground them, pending link suggestions, what the owner stated about disclosure, and the projects other installations of a cluster made from these braindumps | `workflow_editor/docs/mycatalog.md` (and *What the children made, read on the parent*) |
 | `api/nodes` | the custom node templates with the braindump passages that ground each revision | `workflow_editor/docs/node-catalog.md` |
 | `api/catalog/publication/facts/<catalog-project>` | what the catalog's publication contract selects and what the last publication carried | `docs/external-publication.md` (*Seeing and changing it from the Catalog page*) |
 
@@ -66,7 +66,19 @@ The fields the map needs (each response carries more; ignore what you do not use
     `kind: "add"` is an unanswered link between its `braindump` and its `project`.
   - `disclosure.projects[]`: `project`, `state` (`private`, `to be published`, `public`,
     `public without a statement`, `not stated`), `public[]` (`destination`, `commit`, `at`: the
-    publication records).
+    publication records), and `elsewhere` (`instance`, `installation`) when the entry is about a
+    project of another installation.
+  - `clusterProjects[]` (empty, or absent on an older core, when the installation collects no
+    cluster): projects other installations advertise with a ground `cluster:<path>` on a braindump
+    of this catalog. Each has `instance` (the other installation's identity), `installation` (its
+    name, may be null), `project` (the id there), `name`, `intent`, `state`, `because[]` (the
+    advertised grounds, `cluster:braindumps/…/braindump.md`), `head`, `repository`, `fresh`
+    (boolean: the advertisement was read recently enough), `fetched` (when it was last read) and
+    `links.project`, `links.catalog`, `links.conversations` (pages on that installation; each may be
+    null).
+  - `braindumps[].elsewhere[]`: the same records, per braindump whose `path` one of their
+    `because` names. A braindump realized only on another installation has `projects: []` and a
+    non-empty `elsewhere`.
   - `rules[]` (top level, not inside `disclosure`): the adopted rules with the owner's sentence
     (`id`, `source.braindump`, `source.sentence`).
 - `api/nodes`
@@ -86,6 +98,67 @@ The fields the map needs (each response carries more; ignore what you do not use
   - A failed read is a status other than 2xx with a JSON body `{"error": "…"}`; allow for a slow
     answer too.
 
+## Projects of other installations
+
+On a parent installation of a cluster, a braindump may be realized by a project of a child
+installation. That project is not in `projects[]` (the parent's own plan) but in
+`clusterProjects[]` and in the braindump's `elsewhere[]`. Draw it; a map built from `projects[]`
+alone silently drops it.
+
+- **Identity is the installation and the id together.** Two installations may each have a project
+  `tidepool`. Key a local project by its id (`project/<id>`) and a remote one by
+  `<instance>` and id (for example `cluster/<instance>/<id>`) everywhere the map tells projects
+  apart: grouping, positions, selection, neighbours, detail, the address in the URL. Keep the
+  local form unchanged so existing links still work.
+- **One node per project.** `clusterProjects[]` and every braindump's `elsewhere[]` repeat the same
+  record. Merge them by key; keep every distinct `because` and every braindump that lists it.
+- **The line.** Each record in a braindump's `elsewhere[]` is one line from that braindump to that
+  remote project: the other installation's advertised plan cites the braindump. Agreed links and
+  suggestions stay about local projects only.
+- **Label.** Show the installation next to the id (`installation`, or `instance` when it is null).
+- **Stale.** When `fresh` is false, mark the node and the line as stale and give `fetched` (or
+  "never read"): what is drawn is what that installation last said.
+- **Destination.** The way out is `links.project` (a page on the other installation). When it is
+  null, say that the installation advertises no page; the node, its line and its ground stay
+  visible. Link back from its detail to the braindump, and show the advertised ground as given.
+- **Category.** Your decisions are keyed by bare project ids and describe *your* projects. A remote
+  project has no decision of its own: draw it under *Unclassified*, also when a local project with
+  the same id is classified (say so in its detail).
+- **Disclosure.** Use a `disclosure.projects[]` entry only for the installation it is about: for a
+  local project an entry without `elsewhere`, for a remote one the entry whose `elsewhere.instance`
+  is its `instance`. Without such an entry, intent is **unknown**. Selection and publication of a
+  remote project are recorded on its own installation: **unknown** here. A published braindump
+  establishes the publication of that text alone, not of a project grounded on it.
+- **Counts.** Count what is drawn: local plus distinct remote projects, and categories that add up
+  to the same number.
+
+An installation with only local projects (`clusterProjects` empty or absent, every `elsewhere`
+empty) draws exactly the local map: no remote node, no extra note.
+
+A fictional parent and child (see `fictional.cluster` in `example.yaml`): the parent's braindump
+`shore-sounds` is realized on the child installation `dune-lab` by its project `tidepool`, and the
+parent also has a local `tidepool` of its own. `api/catalog` on the parent carries (abridged):
+
+```json
+{
+  "projects": [{"project": "tidepool", "braindumps": [{"id": "shore-sounds"}]}],
+  "braindumps": [{"id": "shore-sounds", "path": "braindumps/episodes/shore-sounds/braindump.md",
+    "projects": ["tidepool"],
+    "elsewhere": [{"instance": "dl-0000", "installation": "dune-lab", "project": "tidepool",
+      "because": ["cluster:braindumps/episodes/shore-sounds/braindump.md"], "state": "created",
+      "fresh": false, "fetched": "2000-01-01T00:00:00Z",
+      "links": {"project": "http://dune-lab.example/wfe/#/ws/tidepool", "catalog": null, "conversations": null}}]}],
+  "clusterProjects": [{"instance": "dl-0000", "installation": "dune-lab", "project": "tidepool", "…": "the same record"}]
+}
+```
+
+The map draws two `tidepool` nodes: `project/tidepool` under its decided category, and
+`cluster/dl-0000/tidepool`, labelled *on dune-lab · stale*, under *Unclassified*, with a line from
+`shore-sounds` to each (one agreed, one elsewhere). Choosing the remote one shows *stale, last read
+2000-01-01*, its ground `cluster:braindumps/episodes/shore-sounds/braindump.md`, disclosure
+unknown, and a link to `http://dune-lab.example/wfe/#/ws/tidepool`; the local one keeps its own
+page `../../#/ws/tidepool`.
+
 ## From the reads to the legend
 
 The legend's states are the example's; the reads use their own words. One mapping that keeps the
@@ -95,13 +168,16 @@ three facts apart (change it if your legend differs):
 | --- | --- | --- | --- |
 | braindump | `rule.never` → private; `rule.suggest` → meant to be public; no `rule` → unknown (a tag without an adopted rule states nothing) | a facts selection whose `paths[]` contains the braindump's `path` → yes; facts read and none → no; facts not read → unknown. Do not use `published` or `rule.selected` of `api/catalog` as a substitute | that selection's `status` starts with `public` → yes; otherwise no publication is recorded |
 | node | unknown (nothing states a disclosure for a template; its grounds' state says nothing about it) | a facts selection with `kind: "node"` and the template's `id` → yes, with the mark `example r<revision>`; none → no; facts not read → unknown | as for a braindump |
-| project | `disclosure.projects[].state`: `private` → private; `to be published`, `public` → meant to be public; `not stated`, `public without a statement` → unknown | unknown: none of the three reads carries a project's contract | `public[]` not empty → yes, with its `destination` and `commit`; empty → no publication is recorded |
+| project | `disclosure.projects[].state` of the entry about this installation's project (no `elsewhere`): `private` → private; `to be published`, `public` → meant to be public; `not stated`, `public without a statement` → unknown | unknown: none of the three reads carries a project's contract | `public[]` not empty → yes, with its `destination` and `commit`; empty → no publication is recorded |
+| project of another installation | the entry whose `elsewhere.instance` is its `instance`, read as above, when that entry carries a stated decision; otherwise unknown | unknown (its contract is on its installation) | unknown (a publication is recorded on its installation) |
 
 A source link is built from `web`: on Gitea a file at a commit is
 `<web>/src/commit/<commit>/<path>#L<line>`, and a commit is `<web>/commit/<commit>`.
 
 - A project: its page in the installation is `../../#/ws/<workspace>` when the entry is `registered`
   and has a `workspace`; show `entry.source` (a clone address, not a page) and `entry.commit` as text.
+- A project of another installation: `links.project` as given (an absolute address on that
+  installation); `repository` and `head` as text.
 - A node template: no page address is part of the three reads; show `source` (provider and commit).
 - A ground carries a `passage` and a `commit`, not a line: link the braindump's file at that commit
   and show the passage.
@@ -119,6 +195,10 @@ The three reads fail and lag independently. Draw what is established and say wha
 | a selection exists and `public` is absent | *Selected*: yes; *Published*: no publication is recorded |
 | a project has no decision in your records | drawn under *Unclassified*, as "no decision" |
 | a decision says `category: unclassified` | drawn under *Unclassified* with its reason: the classifier looked and the evidence did not decide |
+| `clusterProjects` is empty or absent | the local map only; nothing is said about other installations |
+| a remote project's `fresh` is false | drawn, marked stale with `fetched`; never dropped |
+| a remote project's `links.project` is null | drawn with its line and ground; "no page advertised" instead of a link |
+| a decision's project id equals a remote project's id | the decision applies to the local project only; the remote one is *Unclassified* |
 | a decision names a project the installation does not have | listed apart as a decision without a project; not drawn as a project |
 | a decision's evidence names a braindump that is gone | the reason is kept; the evidence is shown as no longer among the braindumps |
 | your decisions file was projected from another catalog commit than `head` | the map names both commits and says the decisions may be behind (the page cannot tell older from newer, and any later catalog commit triggers this until the next refresh) |
@@ -242,4 +322,9 @@ the next page load. With no entry there is no button, and the page stays reachab
   cited commit and line), and who decided.
 - Choose a grounded node and follow its ground to the braindump.
 - Make the facts read fail (or look before it arrives): *Published* reads unknown.
-- Remove the link and the directory: the Catalog page and its relation diagram are unchanged.
+- On a parent of a cluster: choose a braindump realized elsewhere, follow its line to the remote
+  project, reload the page on that address, and open `links.project`; check the installation and
+  project on the page that opens (a 200 only says a page was served). Choose a local and a remote
+  project with the same id and compare their installation, grounds, category and destination.
+- With `clusterProjects` emptied (a fixture), the local map is unchanged.
+- Remove the link and the directory: the Catalog page is unchanged.
