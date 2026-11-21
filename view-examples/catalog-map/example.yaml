@@ -1,0 +1,112 @@
+# Catalog Map: a declarative view example. Adapt it; nothing here is required by agdev's core.
+schema: view-example.catalog-map.v1
+name: Catalog Map
+
+# The three kinds of things the map draws, and where a reader is taken from each.
+entities:
+  braindump:
+    what: a free-form text of what the owner wants and why
+    source: the braindump file in the catalog
+  node:
+    what: a custom workflow node template of the owner's node catalog, at a revision
+    source: the template in the node catalog
+  project:
+    what: a unit of work the owner separates by their own criteria
+    source: the project's page in the installation, when it has one; otherwise its repository and revision as text
+
+# Each relationship is drawn only from its evidence, and drawn according to it.
+relationships:
+  - id: grounds-project
+    from: braindump
+    to: project
+    evidence: a link the owner agreed (the project's `because` in the installation's plan)
+    drawn: solid line
+  - id: suggested-project
+    from: braindump
+    to: project
+    evidence: a link an agent suggested and the owner has not answered
+    drawn: dashed line
+  - id: grounds-node
+    from: braindump
+    to: node
+    evidence: a passage of the braindump adopted as a ground of a template revision
+    drawn: solid line; fainter when the ground is of an earlier revision
+# An entity without any link is still drawn. When the node provider withholds grounds
+# (a child installation reading its parent's templates), nodes are drawn without links
+# and the map says that grounds are not visible, instead of showing them as ungrounded.
+
+# One legend for all three kinds. Three different facts, never merged:
+#   intent    - what the owner stated (a tag, a rule adopted from a braindump's sentence)
+#   selected  - the publication contract selects it
+#   published - a publication record names a public commit that carries it
+# A fact no source establishes is shown as unknown. A project's status says nothing
+# about the status of its grounds, and the reverse.
+disclosure:
+  states:
+    - id: private
+      means: the owner stated it stays local
+      established_by: intent
+    - id: intended-public
+      means: the owner stated it is meant to be public; it is not selected
+      established_by: intent
+    - id: selected
+      means: the publication contract selects it; no publication of it is confirmed
+      established_by: selected
+    - id: published
+      means: a publication record confirms it is public
+      established_by: published
+    - id: unknown
+      means: nothing states, selects or confirms it
+  node_marks:
+    - id: example
+      means: what is published is a portable example of the template at a named revision, not the owner's working template
+  rule: show the strongest established fact, and keep the weaker ones readable beside it
+
+# The categories of the owner whose braindump this example came from. Replace them with yours.
+categories:
+  - id: development-assistant
+    label: Development assistants
+    means: agents that support development itself
+  - id: asset-technique-experiment
+    label: Asset technique experiments
+    means: experiments in techniques for producing specific kinds of assets
+  - id: emerging-technology-experiment
+    label: Emerging technology experiments
+    means: trials of new technologies and ideas
+  - id: production
+    label: Production projects
+    means: projects that make an actual product
+  # A project without a decision is drawn under "Unclassified".
+
+# The shape of one classification decision, kept in the adopter's own catalog.
+classification:
+  keyed_by: project id
+  fields:
+    category: one category id, or unclassified
+    reason: one or two sentences in the classifier's own words
+    evidence: where the classifier read it (a braindump and its commit, with a line when one sentence decides it)
+  attribution: the Git author and history of the decisions file; no author field
+  refresh: an agent re-reads the evidence and rewrites only the entries an agent last wrote; an entry a person changed is kept
+
+# What an adopter records beside the decisions, and what adopting again may touch.
+adoption:
+  record: the example's source, path and commit; the adopter's renamed, dropped and added category ids; where the page is implemented
+  again: compare the example at the new commit with the recorded one and propose the difference; never overwrite the adopter's categories or decisions
+
+# Where the page gets its facts. All three are reads of the installation's own service; README.md names the fields.
+reads:
+  - api/catalog
+  - api/nodes
+  - api/catalog/publication/facts/<catalog-project>
+packaging: local-views/<view>/web/ in the installation's source; an optional link from the Catalog page
+
+fictional:
+  project: tidepool
+  braindumps:
+    - id: shore-sounds
+      text: "I want to try whether short wave recordings can be turned into seamless ambience loops."
+  decision:
+    tidepool:
+      category: asset-technique-experiment
+      reason: "The braindump asks to try a method for making one kind of asset (ambience loops); it names no product that ships them."
+      evidence: {braindump: shore-sounds, commit: "0000000000000000000000000000000000000000", line: 1}

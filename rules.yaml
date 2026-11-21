@@ -40,24 +40,6 @@ rules:
   adopted:
     by: iwaag
     at: '2026-11-18T03:11:36.141Z'
-- id: project-lowerpoly-publish
-  project: lowerpoly
-  follows: publish
-  source:
-    braindump: asset_projects
-    sentence: 公開のアセット制作系プロジェクトは一般化できるワークフロー、知見、スクリプトなどを可能な限り公開する。
-  adopted:
-    by: iwaag
-    at: '2026-11-18T03:13:06.356Z'
-- id: project-gimmickimg-publish
-  project: gimmickimg
-  follows: publish
-  source:
-    braindump: asset_projects
-    sentence: 公開のアセット制作系プロジェクトは一般化できるワークフロー、知見、スクリプトなどを可能な限り公開する。
-  adopted:
-    by: iwaag
-    at: '2026-11-18T03:13:24.016Z'
 - id: workflows-lowerpoly-suggest-publish
   content: workflows
   project: lowerpoly
@@ -76,4 +58,31 @@ rules:
     sentence: 公開のアセット制作系プロジェクトは一般化できるワークフロー、知見、スクリプトなどを可能な限り公開する。
   adopted:
     by: iwaag
-    at: '2026-11-18T03:20:57.800Z'
+    at: '2026-11-19T05:59:14.285Z'
+- id: project-gimmickimg-publish
+  project: gimmickimg
+  follows: publish
+  source:
+    braindump: asset_projects
+    sentence: 公開のアセット制作系プロジェクトは一般化できるワークフロー、知見、スクリプトなどを可能な限り公開する。
+  adopted:
+    by: iwaag
+    at: '2026-11-19T05:59:26.732Z'
+- id: project-lowerpoly-publish
+  project: lowerpoly
+  follows: publish
+  source:
+    braindump: asset_projects
+    sentence: 公開のアセット制作系プロジェクトは一般化できるワークフロー、知見、スクリプトなどを可能な限り公開する。
+  adopted:
+    by: iwaag
+    at: '2026-11-19T05:59:43.193Z'
+- id: project-jevlab-publish
+  project: jevlab
+  follows: publish
+  source:
+    braindump: public
+    sentence: 公益に資する成果を公開で提供する。
+  adopted:
+    by: iwaag
+    at: '2026-11-19T06:05:01.486Z'
